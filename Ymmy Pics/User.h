@@ -10,7 +10,6 @@
 
 @interface User : PFUser<PFSubclassing>
 
-+ (NSString *)parseClassName;
 
 @property (retain) NSString *firstName;
 @property (retain) NSString *lastName;

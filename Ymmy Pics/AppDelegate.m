@@ -31,7 +31,6 @@
     [Parse setApplicationId:@"5J0RZGSskEBBflzbI887NA3HVIifHSngVkeQem0G"
                   clientKey:@"mqP4pUu4pvlTJpisxtNoG0r2PV1PlV25rMwWhWpZ"];
 
-    [PFFacebookUtils initializeFacebook];
 
     // [Optional] Track statistics around application opens.
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
@@ -42,16 +41,6 @@
     [Media registerSubclass];
     [Activity registerSubclass];
     return true;
-}
-
-// added for integrating Facebook SDK
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation
-{
-    // attempt to extract a token from the url
-    return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -69,10 +58,6 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-
-    // Logs 'install' and 'app activate' App Events.
-    [FBAppEvents activateApp];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
