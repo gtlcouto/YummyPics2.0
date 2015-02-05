@@ -18,6 +18,6 @@
 @property User *mediaOwner;
 
 
-+(void)addMedia:(PFFile *)media fromUser:(User *)user;
++(void)addMedia:(PFFile *)mediaFile withCaption:(NSString *)caption;
 
 @end

@@ -27,6 +27,10 @@
 		0AB034B31A80592600AD1912 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB034AC1A80592600AD1912 /* ParseCrashReporting.framework */; };
 		0AB034B41A80592600AD1912 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB034AD1A80592600AD1912 /* ParseFacebookUtils.framework */; };
 		0AB034B51A80592600AD1912 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB034AE1A80592600AD1912 /* ParseUI.framework */; };
+		2955B0261A82E56E00E7D8A5 /* TakePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2955B0251A82E56E00E7D8A5 /* TakePhotoViewController.m */; };
+		2955B0281A82E57700E7D8A5 /* HeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2955B0271A82E57700E7D8A5 /* HeaderTableViewCell.m */; };
+		2955B02C1A82E59200E7D8A5 /* DetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2955B02B1A82E59200E7D8A5 /* DetailTableViewCell.m */; };
+		2955B0321A82EAEB00E7D8A5 /* FacebookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2955B0311A82EAEB00E7D8A5 /* FacebookViewController.m */; };
 		296EE3481A804A7400F5AF94 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 296EE3471A804A7400F5AF94 /* User.m */; };
 		296EE34B1A804F3900F5AF94 /* Media.m in Sources */ = {isa = PBXBuildFile; fileRef = 296EE34A1A804F3900F5AF94 /* Media.m */; };
 		296EE34E1A8051D500F5AF94 /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = 296EE34D1A8051D500F5AF94 /* Activity.m */; };
@@ -68,6 +72,14 @@
 		0AB034AC1A80592600AD1912 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseCrashReporting.framework; sourceTree = "<group>"; };
 		0AB034AD1A80592600AD1912 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		0AB034AE1A80592600AD1912 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
+		2955B0241A82E56400E7D8A5 /* TakePhotoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TakePhotoViewController.h; path = ../../../../../../Downloads/TakePhotoViewController.h; sourceTree = "<group>"; };
+		2955B0251A82E56E00E7D8A5 /* TakePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TakePhotoViewController.m; path = ../../../../../../Downloads/TakePhotoViewController.m; sourceTree = "<group>"; };
+		2955B0271A82E57700E7D8A5 /* HeaderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HeaderTableViewCell.m; path = ../../../../../../Downloads/HeaderTableViewCell.m; sourceTree = "<group>"; };
+		2955B0291A82E58000E7D8A5 /* HeaderTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HeaderTableViewCell.h; path = ../../../../../../Downloads/HeaderTableViewCell.h; sourceTree = "<group>"; };
+		2955B02A1A82E58700E7D8A5 /* DetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DetailTableViewCell.h; path = ../../../../../../Downloads/DetailTableViewCell.h; sourceTree = "<group>"; };
+		2955B02B1A82E59200E7D8A5 /* DetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailTableViewCell.m; path = ../../../../../../Downloads/DetailTableViewCell.m; sourceTree = "<group>"; };
+		2955B0301A82EAEB00E7D8A5 /* FacebookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookViewController.h; path = ../FacebookViewController.h; sourceTree = "<group>"; };
+		2955B0311A82EAEB00E7D8A5 /* FacebookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacebookViewController.m; path = ../FacebookViewController.m; sourceTree = "<group>"; };
 		296EE3461A804A7400F5AF94 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		296EE3471A804A7400F5AF94 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		296EE3491A804F3900F5AF94 /* Media.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Media.h; sourceTree = "<group>"; };
@@ -228,6 +240,14 @@
 		35463BFD1A803CF800FE9B1E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2955B0301A82EAEB00E7D8A5 /* FacebookViewController.h */,
+				2955B0311A82EAEB00E7D8A5 /* FacebookViewController.m */,
+				2955B02A1A82E58700E7D8A5 /* DetailTableViewCell.h */,
+				2955B02B1A82E59200E7D8A5 /* DetailTableViewCell.m */,
+				2955B0291A82E58000E7D8A5 /* HeaderTableViewCell.h */,
+				2955B0271A82E57700E7D8A5 /* HeaderTableViewCell.m */,
+				2955B0251A82E56E00E7D8A5 /* TakePhotoViewController.m */,
+				2955B0241A82E56400E7D8A5 /* TakePhotoViewController.h */,
 				35463BDE1A803CCE00FE9B1E /* RootViewController.h */,
 				35463BDF1A803CCE00FE9B1E /* RootViewController.m */,
 			);
@@ -346,8 +366,12 @@
 				296EE3481A804A7400F5AF94 /* User.m in Sources */,
 				296EE34B1A804F3900F5AF94 /* Media.m in Sources */,
 				35463BE01A803CCE00FE9B1E /* RootViewController.m in Sources */,
+				2955B02C1A82E59200E7D8A5 /* DetailTableViewCell.m in Sources */,
 				35463BDD1A803CCE00FE9B1E /* AppDelegate.m in Sources */,
+				2955B0281A82E57700E7D8A5 /* HeaderTableViewCell.m in Sources */,
+				2955B0261A82E56E00E7D8A5 /* TakePhotoViewController.m in Sources */,
 				296EE34E1A8051D500F5AF94 /* Activity.m in Sources */,
+				2955B0321A82EAEB00E7D8A5 /* FacebookViewController.m in Sources */,
 				35463BDA1A803CCE00FE9B1E /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

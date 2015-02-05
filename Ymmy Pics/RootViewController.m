@@ -17,8 +17,13 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import "User.h"
+#import "DetailTableViewCell.h"
+#import "HeaderTableViewCell.h"
 
-@interface RootViewController () <FBLoginViewDelegate>
+@interface RootViewController () <FBLoginViewDelegate,UITableViewDataSource,UITableViewDelegate>
+
+
+@property NSArray *testArray;
 
 @end
 
@@ -26,68 +31,54 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    
     // Do any additional setup after loading the view, typically from a nib.
+    self.testArray = [[NSArray alloc] initWithObjects:@"one", @"two", nil];
 
 
-
-
-//    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
-//    testObject[@"foo"] = @"bar";
-//    [testObject saveInBackground];
-//
-    FBLoginView *loginView = [[FBLoginView alloc] initWithReadPermissions:@[@"public_profile", @"email",]];
-    loginView.center = self.view.center;
-    [self.view addSubview:loginView];
-
-
-
-
-
-    // facebook login delegate
-    loginView.delegate = self;
 
 }
 
+#pragma mark - TableView Delegate Methods
 
-- (void)loginView:(FBLoginView *)loginView handleError:(NSError *)error
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(error.description);
+    return 1;
 }
-- (void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%@",user[@"first_name"]);
-    User *tempUser = [User currentUser];
-
-    tempUser.firstName = user[@"first_name"];
-    tempUser.lastName = user[@"last_name"];
-    tempUser.email = user[@"email"];
-    tempUser.facebookId = user[@"id"];
-
-    NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=normal", user[@"id"]]];
-    NSURL *pictureURLSmall = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=small", user[@"id"]]];
-    NSData *imageData = [NSMutableData dataWithContentsOfURL:pictureURL];
-    NSData *imageData2 = [NSMutableData dataWithContentsOfURL:pictureURLSmall];
-
-   tempUser.profilePictureMedium = [PFFile fileWithData:imageData];
-    tempUser.profilePictureSmall = [PFFile fileWithData:imageData2];
-    tempUser.username = @"test908";
+    static NSString *CellIdentifier = @"detailCell";
+    DetailTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    cell.customImageView.image = [UIImage imageNamed:@"riodejaneiro"];
+    if (cell == nil){
+        [NSException raise:@"headerView == nil.." format:@"No cells with matching CellIdentifier loaded from your storyboard"];
+    }
 
 
-    [tempUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded)
-        {
-            NSLog(@"Worked!");
-        }
-        else
-        {
-            NSLog(error.description);
-        }
-    }];
-    
-    
-    
-    
-    
+    return cell;
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return self.testArray.count;
+}
+
+-(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    static NSString *CellIdentifier = @"headerCell";
+    HeaderTableViewCell *headerView = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (headerView == nil){
+        [NSException raise:@"headerView == nil.." format:@"No cells with matching CellIdentifier loaded from your storyboard"];
+    }
+
+    headerView.userNameLabel.text = self.testArray[section];
+    headerView.backgroundColor = [UIColor cyanColor];
+    return headerView;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 50.0;
 }
 
     @end
