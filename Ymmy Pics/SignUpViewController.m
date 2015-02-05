@@ -36,16 +36,25 @@
     user.username = self.userTextField.text;
     user.password = self.passwordTextField.text;
     user.email = self.emailTextField.text;
+    UIAlertView * signUpAlert = [UIAlertView new];
+    [signUpAlert addButtonWithTitle:@"Okay"];
+
 
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
-            // Hooray! Let them use the app now.
-            
+
+            signUpAlert.title = @"Sucess!";
+            signUpAlert.message = @"Your registration was sucessful, an email has been sent to you to confirm your registration. Please validate your email before attempting to log in";
+            [signUpAlert show];
             [self dismissViewControllerAnimated:YES completion:nil];
         } else {
             NSString *errorString = [error userInfo][@"error"];
             NSLog(@"%@", errorString);
+            signUpAlert.title = @"Sorry";
+            signUpAlert.message = [NSString stringWithFormat:@"We couldn't complete your registration, %@", errorString];
+            [signUpAlert show];
             // Show the errorString somewhere and let the user try again.
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
 
     }];
