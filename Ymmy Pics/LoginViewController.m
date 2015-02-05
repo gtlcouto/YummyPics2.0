@@ -63,19 +63,28 @@
         // show the signup or login screen
     NSString * username = [NSString stringWithFormat:@"%@", self.userTextField.text];
     NSString * password = [NSString stringWithFormat:@"%@", self.passwordTextField.text];
+    UIAlertView * loginAlert = [UIAlertView new];
+    loginAlert.title = @"Login Failed";
+    [loginAlert addButtonWithTitle:@"Okay"];
 
 
     [PFUser logInWithUsernameInBackground:username password:password
                                     block:^(PFUser *user, NSError *error) {
                                         if (user) {
-                                            // Do stuff after successful login.
+                                            if (![[user objectForKey:@"emailVerified"] boolValue]) {
+                                                // Refresh to make sure the user did not recently verify
+                                                [user fetch];
+                                                if (![[user objectForKey:@"emailVerified"] boolValue]) {
+                                                    loginAlert.message = @"Please Verify your email before logging in";
+                                                    [loginAlert show];
+                                                    return;
+                                                }
+                                            }
                                              [self performSegueWithIdentifier:@"toTabSegue" sender:nil];
                                         } else {
                                             NSLog(@"%@", error.description);
-                                            UIAlertView * loginAlert = [UIAlertView new];
-                                            loginAlert.title = @"Login Failed";
+
                                             loginAlert.message = @"Username or password not corrent, please try again or sign up!";
-                                            [loginAlert addButtonWithTitle:@"Okay"];
                                             [loginAlert show];
                                         }
                                     }];
