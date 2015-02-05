@@ -534,6 +534,7 @@
                         <viewControllerLayoutGuide type="bottom" id="10e-Us-5uL"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="1FJ-y0-d8x">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Followers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="myY-CD-Brx">
@@ -742,6 +743,7 @@
                         <viewControllerLayoutGuide type="bottom" id="exb-ag-ceP"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="qZB-sJ-rHW">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ixY-ro-Owa">
