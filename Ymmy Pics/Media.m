@@ -35,6 +35,23 @@
 
 }
 
++ (void) retrieveFollowedPeopleMedias:(void (^)(NSArray *))complete
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"Activity"];
+    [query whereKey:@"fromUser" equalTo:[User currentUser]];
+    [query whereKey:@"type" equalTo:@"FOLLOW"];
+
+    PFQuery *userQuery = [PFQuery queryWithClassName:@"Media"];
+    [userQuery whereKey:@"mediaOwner" matchesKey:@"fromUser" inQuery:query];
+    [userQuery addAscendingOrder:@"createdAt"];
+
+    NSArray *mediaFromFollowedPeople  = [userQuery findObjects];
+
+    complete(mediaFromFollowedPeople);
+    
+    
+}
+
 
 
 
