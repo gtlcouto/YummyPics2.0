@@ -30,14 +30,18 @@
 
 + (User*) currentUser
 {
-    return (User*)[PFUser user];
+    return (User*)[PFUser currentUser];
 }
 
 
 + (void) retrieveUserWithUserName:(NSString *)text completion:(void (^)(NSArray *))complete
 {
     PFQuery *query = [PFQuery queryWithClassName:@"User"];
-    [query whereKey:@"fromUser" containsString:text];
+
+    if (![text isEqualToString:@""])
+    {
+        [query whereKey:@"fromUser" containsString:text];
+    }
 
     NSArray *users = [query findObjects];
 

@@ -31,7 +31,8 @@
     media.mediaOwner = [User currentUser];
     media.caption = caption;
 
-    [media save];
+    [media saveInBackground];
+
 
 }
 
