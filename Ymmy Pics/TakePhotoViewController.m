@@ -8,6 +8,11 @@
 
 #import "TakePhotoViewController.h"
 
+#import <Parse/Parse.h>
+#import <FacebookSDK/FacebookSDK.h>
+#import <ParseFacebookUtils/PFFacebookUtils.h>
+#import "Media.h"
+
 @interface TakePhotoViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @end
@@ -41,6 +46,17 @@
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
 
     [picker dismissViewControllerAnimated:YES completion:NULL];
+
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    NSData *imageData = UIImagePNGRepresentation(chosenImage);
+    PFFile *file = [PFFile fileWithData:imageData];
+    [Media addMedia:file withCaption:@"Nice picture brochacho"];
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+
 
 }
 
