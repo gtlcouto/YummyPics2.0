@@ -27,7 +27,6 @@
 		0AB034B31A80592600AD1912 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB034AC1A80592600AD1912 /* ParseCrashReporting.framework */; };
 		0AB034B41A80592600AD1912 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB034AD1A80592600AD1912 /* ParseFacebookUtils.framework */; };
 		0AB034B51A80592600AD1912 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB034AE1A80592600AD1912 /* ParseUI.framework */; };
-		2955B0321A82EAEB00E7D8A5 /* FacebookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2955B0311A82EAEB00E7D8A5 /* FacebookViewController.m */; };
 		296EE3481A804A7400F5AF94 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 296EE3471A804A7400F5AF94 /* User.m */; };
 		296EE34B1A804F3900F5AF94 /* Media.m in Sources */ = {isa = PBXBuildFile; fileRef = 296EE34A1A804F3900F5AF94 /* Media.m */; };
 		296EE34E1A8051D500F5AF94 /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = 296EE34D1A8051D500F5AF94 /* Activity.m */; };
@@ -41,6 +40,8 @@
 		35463BE51A803CCE00FE9B1E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35463BE41A803CCE00FE9B1E /* Images.xcassets */; };
 		35463BE81A803CCE00FE9B1E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35463BE61A803CCE00FE9B1E /* LaunchScreen.xib */; };
 		35463BF41A803CCE00FE9B1E /* Ymmy_PicsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 35463BF31A803CCE00FE9B1E /* Ymmy_PicsTests.m */; };
+		35AA85CA1A82FC45004F31F9 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35AA85C91A82FC45004F31F9 /* SignUpViewController.m */; };
+		35AA85CD1A830197004F31F9 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35AA85CC1A830197004F31F9 /* LoginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,8 +73,6 @@
 		0AB034AC1A80592600AD1912 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseCrashReporting.framework; sourceTree = "<group>"; };
 		0AB034AD1A80592600AD1912 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		0AB034AE1A80592600AD1912 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
-		2955B0301A82EAEB00E7D8A5 /* FacebookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookViewController.h; path = ../FacebookViewController.h; sourceTree = "<group>"; };
-		2955B0311A82EAEB00E7D8A5 /* FacebookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacebookViewController.m; path = ../FacebookViewController.m; sourceTree = "<group>"; };
 		296EE3461A804A7400F5AF94 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		296EE3471A804A7400F5AF94 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		296EE3491A804F3900F5AF94 /* Media.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Media.h; sourceTree = "<group>"; };
@@ -99,6 +98,10 @@
 		35463BED1A803CCE00FE9B1E /* Ymmy PicsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Ymmy PicsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		35463BF21A803CCE00FE9B1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		35463BF31A803CCE00FE9B1E /* Ymmy_PicsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Ymmy_PicsTests.m; sourceTree = "<group>"; };
+		35AA85C81A82FC45004F31F9 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
+		35AA85C91A82FC45004F31F9 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
+		35AA85CB1A830197004F31F9 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		35AA85CC1A830197004F31F9 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,10 +249,12 @@
 				297261ED1A82F7380007D1E4 /* HeaderTableViewCell.m */,
 				297261E91A82F72C0007D1E4 /* DetailTableViewCell.h */,
 				297261EA1A82F72C0007D1E4 /* DetailTableViewCell.m */,
-				2955B0301A82EAEB00E7D8A5 /* FacebookViewController.h */,
-				2955B0311A82EAEB00E7D8A5 /* FacebookViewController.m */,
 				35463BDE1A803CCE00FE9B1E /* RootViewController.h */,
 				35463BDF1A803CCE00FE9B1E /* RootViewController.m */,
+				35AA85C81A82FC45004F31F9 /* SignUpViewController.h */,
+				35AA85C91A82FC45004F31F9 /* SignUpViewController.m */,
+				35AA85CB1A830197004F31F9 /* LoginViewController.h */,
+				35AA85CC1A830197004F31F9 /* LoginViewController.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -367,11 +372,12 @@
 				296EE3481A804A7400F5AF94 /* User.m in Sources */,
 				296EE34B1A804F3900F5AF94 /* Media.m in Sources */,
 				35463BE01A803CCE00FE9B1E /* RootViewController.m in Sources */,
+				35AA85CA1A82FC45004F31F9 /* SignUpViewController.m in Sources */,
 				35463BDD1A803CCE00FE9B1E /* AppDelegate.m in Sources */,
 				297261EE1A82F7380007D1E4 /* HeaderTableViewCell.m in Sources */,
 				296EE34E1A8051D500F5AF94 /* Activity.m in Sources */,
-				2955B0321A82EAEB00E7D8A5 /* FacebookViewController.m in Sources */,
 				297261EB1A82F72C0007D1E4 /* DetailTableViewCell.m in Sources */,
+				35AA85CD1A830197004F31F9 /* LoginViewController.m in Sources */,
 				35463BDA1A803CCE00FE9B1E /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
