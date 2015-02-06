@@ -11,5 +11,6 @@
 @interface DetailTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *customImageView;
 @property (weak, nonatomic) IBOutlet UILabel *likesLabel;
+@property (weak, nonatomic) IBOutlet UIButton *likeButton;
 
 @end

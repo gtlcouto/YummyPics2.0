@@ -23,6 +23,7 @@
 + (void) retrieveMediasFromUser:(User*)user withCompletion:(void (^)(NSArray *array))complete;
 
 +(UIImage *)getImageFromPFFile:(PFFile *)file;
+- (BOOL) checkIfMediaIsLiked;
 
 
 @end

@@ -18,6 +18,7 @@
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import "User.h"
 #import "Media.h"
+#import "Activity.h"
 #import "DetailTableViewCell.h"
 #import "HeaderTableViewCell.h"
 
@@ -26,6 +27,7 @@
 
 @property NSArray *testArray;
 @property (weak, nonatomic) IBOutlet UITableView *newsFeedTableView;
+
 
 @end
 
@@ -57,6 +59,16 @@
     static NSString *CellIdentifier = @"detailCell";
     DetailTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     Media *media = self.testArray[indexPath.section];
+
+    if ([media checkIfMediaIsLiked])
+    {
+        [cell.likeButton setImage:[UIImage imageNamed:@"likedbar"] forState:UIControlStateNormal];
+    }
+    else
+    {
+        [cell.likeButton setImage:[UIImage imageNamed:@"likebar"] forState:UIControlStateNormal];
+    }
+    cell.likeButton.tag = indexPath.section;
     cell.customImageView.image = [Media getImageFromPFFile:media.mediaFile];
     if (cell == nil){
         [NSException raise:@"headerView == nil.." format:@"No cells with matching CellIdentifier loaded from your storyboard"];
@@ -70,22 +82,24 @@
     return self.testArray.count;
 }
 
-- (void) seaver
+
+- (IBAction)onLikeButtonPressed:(UIButton *)sender
 {
 
-    PFQuery *query = [PFQuery queryWithClassName:@"UserNetwork"];
+    Media *media = self.testArray[sender.tag];
 
-    [query whereKey:@"User" equalTo:[PFUser currentUser]];
+    if (![media checkIfMediaIsLiked])
+    {
 
-    PFObject *userNetwork = [query getFirstObject];
+        [Activity likeMedia:media];
+    }
+    else
+    {
 
-    PFObject *user = userNetwork[@"User"];
-
-
-
-
-}
-- (IBAction)onLikeButtonPressed:(UIButton *)sender {
+        [Activity unlikeMedia:media];
+    }
+    NSIndexSet *indexSet = [[NSIndexSet alloc]initWithIndex:sender.tag];
+    [self.newsFeedTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
 }
 
 -(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

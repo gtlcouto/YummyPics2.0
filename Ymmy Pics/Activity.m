@@ -50,6 +50,33 @@
 
 }
 
+
++ (void) likeMedia:(Media *)media
+{
+    Activity *activity = [Activity object];
+    activity.fromUser = [User currentUser];
+    activity.toUser = media.mediaOwner;
+    activity.type = @"LIKE";
+    activity.media = media;
+
+    [activity saveInBackground];
+}
+
++ (void) unlikeMedia:(Media *)media
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"Activity"];
+
+
+    [query whereKey:@"fromUser" equalTo:[User currentUser]];
+    [query whereKey:@"type" equalTo:@"LIKE"];
+    [query whereKey:@"media" equalTo:media];
+
+
+    Activity *activity = [query getFirstObject];
+
+    [activity deleteInBackground];
+}
+
 + (void)followUser:(User *)toUser withCompletion:(void (^)(BOOL succeeded))complete
 {
     Activity *activity = [Activity object];

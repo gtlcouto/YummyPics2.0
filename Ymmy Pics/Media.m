@@ -7,6 +7,7 @@
 //
 
 #import "Media.h"
+#import "Activity.h"
 
 @implementation Media
 
@@ -82,6 +83,28 @@
 {
     NSData *data = [file getData];
     return [UIImage imageWithData:data];
+}
+
+- (BOOL) checkIfMediaIsLiked
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"Activity"];
+
+    [query whereKey:@"media" equalTo:self];
+    [query whereKey:@"type" equalTo:@"LIKE"];
+    [query whereKey:@"fromUser" equalTo:[User currentUser]];
+
+
+    Activity *activity = [query getFirstObject];
+
+    if (activity)
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+
 }
 
 

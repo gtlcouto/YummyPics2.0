@@ -22,9 +22,14 @@
 @property (retain,nonatomic) NSDate *createdAt;
 @property (retain,nonatomic) NSDate *updatedAt;
 
-+(void)followUser:(User *)toUser withCompletion:(void (^)(BOOL succeeded))complete;
-+ (void)unfollowUser:(User *)toUser withCompletion:(void (^)(BOOL succeeded))complete;
+
+
++ (void) likeMedia:(Media *)media;
++ (void) unlikeMedia:(Media *)media;
++ (void) followUser:(User *)toUser withCompletion:(void (^)(BOOL succeeded))complete;
++ (void) unfollowUser:(User *)toUser withCompletion:(void (^)(BOOL succeeded))complete;
 + (BOOL) checkIfUserIsFollowing:(User *)user;
+
 
 
 
