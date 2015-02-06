@@ -115,7 +115,7 @@
 
 }
 
-+ (void)getAllYourActivitiesWithBlock:(void (^)(BOOL succeeded))complete
++ (void)getAllYourActivitiesWithBlock:(void (^)(NSArray * array))complete
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Activity"];
 
@@ -123,6 +123,7 @@
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
 
+        complete(objects);
     }];
 }
 
