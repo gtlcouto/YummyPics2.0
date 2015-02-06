@@ -31,6 +31,20 @@
 }
 
 
++ (void) retrieveAllCommentsFromMedia:(Media *)media withCompletion:(void (^)(NSArray *array))complete
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"Activity"];
+
+    [query whereKey:@"media" equalTo:media];
+    [query whereKey:@"type" equalTo:@"COMMENT"];
+
+
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        complete(objects);
+    }];
+}
+
+
 + (BOOL) checkIfUserIsFollowing:(User *)user
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Activity"];
@@ -72,7 +86,7 @@
     [query whereKey:@"media" equalTo:media];
 
 
-    Activity *activity = [query getFirstObject];
+    Activity *activity = (Activity *)[query getFirstObject];
 
     [activity deleteInBackground];
 }
@@ -85,15 +99,7 @@
     activity.type = @"FOLLOW"; // ActivityTypeFollow
 
 
-    int i = [toUser.numberOfFollowers intValue];
 
-
-    toUser.numberOfFollowers = [NSNumber numberWithInt:(i + 1)];
-    [User currentUser].numberOfFollows = [NSNumber numberWithInt:[[User currentUser].numberOfFollows intValue] +1];
-
-
-    [toUser saveInBackground];
-    [[User currentUser] saveInBackground];
 
 
     [activity saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -109,6 +115,17 @@
 
 }
 
++ (void)getAllYourActivitiesWithBlock:(void (^)(BOOL succeeded))complete
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"Activity"];
+
+    [query whereKey:@"toUser" equalTo:[User currentUser]];
+
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+
+    }];
+}
+
 + (void)unfollowUser:(User *)toUser withCompletion:(void (^)(BOOL succeeded))complete
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Activity"];
@@ -117,17 +134,9 @@
     [query whereKey:@"fromUser" equalTo:[User currentUser]];
     [query whereKey:@"type" equalTo:@"FOLLOW"];
 
-    Activity *activity = [query getFirstObject];
-
-    int i = [toUser.numberOfFollowers intValue];
+    Activity *activity = (Activity *)[query getFirstObject];
 
 
-    toUser.numberOfFollowers = [NSNumber numberWithInt:(i - 1)];
-    [User currentUser].numberOfFollows = [NSNumber numberWithInt:[[User currentUser].numberOfFollows intValue] -1];
-
-
-    [toUser saveInBackground];
-    [[User currentUser] saveInBackground];
 
     [activity deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
     {
@@ -142,7 +151,41 @@
     }];
 }
 
-+ (void) commentOnMedia:(Media *)media withContent:(NSString *)content
++ (NSUInteger) getNumberOfFolloweesFromUser:(User *)user
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"Activity"];
+
+    [query whereKey:@"fromUser" equalTo:user];
+    [query whereKey:@"type" equalTo:@"FOLLOW"];
+
+    return [query findObjects].count;
+
+}
+
+
+
++ (NSUInteger) getNumberOfFollowersFromUser:(User *)user
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"Activity"];
+
+    [query whereKey:@"toUser" equalTo:user];
+    [query whereKey:@"type" equalTo:@"FOLLOW"];
+
+    return [query findObjects].count;
+
+}
+
++ (NSUInteger) getNumberOfLikesOnMedia:(Media *)media
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"Activity"];
+
+    [query whereKey:@"media" equalTo:media];
+    [query whereKey:@"type" equalTo:@"LIKE"];
+
+    return [query findObjects].count;
+}
+
++ (void) commentOnMedia:(Media *)media withContent:(NSString *)content withCompletion:(void (^)(BOOL succeded))complete
 {
     Activity *activity = [Activity object];
     activity.fromUser = [User currentUser];
@@ -151,7 +194,16 @@
     activity.content = content;
     activity.type = @"COMMENT";
 
-    [activity save];
+    [activity saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded)
+        {
+            complete(true);
+        }
+        else
+        {
+            complete(false);
+        }
+    }];
 
 }
 
@@ -162,7 +214,7 @@
     [query whereKey:@"content" equalTo:content];
     [query whereKey:@"type" equalTo:@"COMMENT"];
 
-    Activity *activity  = [query getFirstObject];
+    Activity *activity  = (Activity *)[query getFirstObject];
 
     [activity deleteInBackground];
 }
@@ -174,7 +226,7 @@
     [query whereKey:@"content" equalTo:oldContent];
     [query whereKey:@"type" equalTo:@"COMMENT"];
 
-    Activity *activity  = [query getFirstObject];
+    Activity *activity  = (Activity *)[query getFirstObject];
     activity.content = newContent;
 
     [activity saveInBackground];

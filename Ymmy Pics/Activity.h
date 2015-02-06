@@ -26,8 +26,14 @@
 
 + (void) likeMedia:(Media *)media;
 + (void) unlikeMedia:(Media *)media;
++ (void) commentOnMedia:(Media *)media withContent:(NSString *)content withCompletion:(void (^)(BOOL succeded))complete;
+
 + (void) followUser:(User *)toUser withCompletion:(void (^)(BOOL succeeded))complete;
 + (void) unfollowUser:(User *)toUser withCompletion:(void (^)(BOOL succeeded))complete;
++ (void) retrieveAllCommentsFromMedia:(Media *)media withCompletion:(void (^)(NSArray *array))complete;
++ (NSUInteger) getNumberOfFolloweesFromUser:(User *)user;
++ (NSUInteger) getNumberOfFollowersFromUser:(User *)user;
++ (NSUInteger) getNumberOfLikesOnMedia:(Media *)media;
 + (BOOL) checkIfUserIsFollowing:(User *)user;
 
 

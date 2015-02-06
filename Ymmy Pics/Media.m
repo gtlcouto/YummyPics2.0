@@ -8,12 +8,14 @@
 
 #import "Media.h"
 #import "Activity.h"
+#import "HashTag.h"
 
 @implementation Media
 
 @dynamic mediaFile;
 @dynamic caption;
 @dynamic mediaOwner;
+@dynamic mediaImage;
 
 + (void)load
 {
@@ -25,7 +27,7 @@
     return @"Media";
 }
 
-+(void)addMedia:(UIImage *)mediaImage withCaption:(NSString *)caption;
++(void)addMedia:(UIImage *)mediaImage withCaption:(NSString *)caption withCompletion:(void (^)(BOOL succeeded))complete
 {
     NSData *imageData = UIImageJPEGRepresentation(mediaImage, 0.4);
     PFFile *file = [PFFile fileWithData:imageData];
@@ -35,11 +37,17 @@
     media.mediaOwner = [User currentUser];
     media.caption = caption;
 
-    [User currentUser].numberOfPosts = [NSNumber numberWithInt:([[User currentUser].numberOfPosts intValue] +1)];
 
-    [[User currentUser] saveInBackground];
 
-    [media saveInBackground];
+
+    [media saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+    {
+        if (succeeded)
+        {
+            [HashTag searchForHashTag:media.caption onMedia:media];
+        }
+        complete(true);
+    }];
 
 
 }
@@ -52,11 +60,26 @@
     [userQuery addDescendingOrder:@"createdAt"];
 
     [userQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+
+
         complete(objects);
     }];
 
     
 
+}
+
++ (NSUInteger) getNumberOfPosts:(User *)user
+{
+
+    PFQuery *userQuery = [PFQuery queryWithClassName:@"Media"];
+    [userQuery whereKey:@"mediaOwner" equalTo:user];
+    //[userQuery addDescendingOrder:@"createdAt"];
+
+    return [userQuery findObjects].count;
+    
+    
+    
 }
 
 + (void) retrieveFollowedPeopleMedias:(void (^)(NSArray *))complete
@@ -66,11 +89,14 @@
     [query whereKey:@"type" equalTo:@"FOLLOW"];
 
     PFQuery *userQuery = [PFQuery queryWithClassName:@"Media"];
-    [userQuery whereKey:@"mediaOwner" matchesKey:@"fromUser" inQuery:query];
+    [userQuery whereKey:@"mediaOwner" matchesKey:@"toUser" inQuery:query];
     
-    [userQuery addAscendingOrder:@"createdAt"];
+    [userQuery addDescendingOrder:@"createdAt"];
+    userQuery.limit = 10;
 
     [userQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+
+
         complete(objects);
     }];
 
@@ -94,7 +120,7 @@
     [query whereKey:@"fromUser" equalTo:[User currentUser]];
 
 
-    Activity *activity = [query getFirstObject];
+    Activity *activity = (Activity *)[query getFirstObject];
 
     if (activity)
     {

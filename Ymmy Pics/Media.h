@@ -13,17 +13,19 @@
 
 + (NSString *)parseClassName;
 
-@property PFFile *mediaFile;
-@property NSString *caption;
-@property User *mediaOwner;
+@property (retain) PFFile *mediaFile;
+@property (retain) NSString *caption;
+@property (retain,nonatomic) User *mediaOwner;
+@property (retain) UIImage *mediaImage;
 
 
-+ (void) addMedia:(UIImage *)mediaImage withCaption:(NSString *)caption;
++ (void) addMedia:(UIImage *)mediaImage withCaption:(NSString *)caption withCompletion:(void (^)(BOOL succeeded))complete;
 + (void) retrieveFollowedPeopleMedias:(void (^)(NSArray *array))complete;
 + (void) retrieveMediasFromUser:(User*)user withCompletion:(void (^)(NSArray *array))complete;
 
 +(UIImage *)getImageFromPFFile:(PFFile *)file;
 - (BOOL) checkIfMediaIsLiked;
++ (NSUInteger) getNumberOfPosts:(User *)user;
 
 
 @end

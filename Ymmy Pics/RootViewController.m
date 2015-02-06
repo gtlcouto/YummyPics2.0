@@ -13,6 +13,9 @@
 
 
 #import "RootViewController.h"
+#import "CommentsViewController.h"
+#import "HashTagViewController.h"
+#import "ProfileViewController.h"
 #import <Parse/Parse.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
@@ -26,6 +29,7 @@
 
 
 @property NSArray *testArray;
+@property NSMutableArray *imagesArray;
 @property (weak, nonatomic) IBOutlet UITableView *newsFeedTableView;
 
 
@@ -37,23 +41,27 @@
     [super viewDidLoad];
 
     
-    // Do any additional setup after loading the view, typically from a nib.
-    [Media retrieveFollowedPeopleMedias:^(NSArray *array) {
-        self.testArray = array;
-        [self.newsFeedTableView reloadData];
-    }];
+//    // Do any additional setup after loading the view, typically from a nib.
+//    [Media retrieveFollowedPeopleMedias:^(NSArray *array) {
+//        self.testArray = array;
+//        [self.newsFeedTableView reloadData];
+//    }];
+    self.imagesArray = [NSMutableArray new];
 
 
 
 }
 
-- (void) viewWillAppear:(BOOL)animated
+- (void) viewDidAppear:(BOOL)animated
 {
-    [super viewWillAppear:true];
+    [super viewDidAppear:true];
     [Media retrieveFollowedPeopleMedias:^(NSArray *array) {
         self.testArray = array;
+
+
         [self.newsFeedTableView reloadData];
     }];
+
 }
 
 #pragma mark - TableView Delegate Methods
@@ -71,13 +79,33 @@
 
     if ([media checkIfMediaIsLiked])
     {
-        [cell.likeButton setImage:[UIImage imageNamed:@"likedbar"] forState:UIControlStateNormal];
+        [cell.likeButton setImage:[UIImage imageNamed:@"Likedbar"] forState:UIControlStateNormal];
     }
     else
     {
         [cell.likeButton setImage:[UIImage imageNamed:@"likebar"] forState:UIControlStateNormal];
     }
+
+    cell.captionTextField.text = media.caption;
+    cell.likesLabel.text = [NSString stringWithFormat:@"%lu likes",(unsigned long)[Activity getNumberOfLikesOnMedia:media]];
+
+    [cell.captionTextField setDetectionBlock:^(STTweetHotWord hotWord, NSString *string, NSString *protocol, NSRange range) {
+       
+
+        if (hotWord == STTweetHashtag)
+        {
+            [self performSegueWithIdentifier:@"HashTagSegue" sender:string];
+        }
+        else if (hotWord == STTweetHandle)
+        {
+            [self performSegueWithIdentifier:@"ProfileSegue" sender:string];
+        }
+
+    }];
+
     cell.likeButton.tag = indexPath.section;
+    cell.commentButton.tag = indexPath.section;
+    
     cell.customImageView.image = [Media getImageFromPFFile:media.mediaFile];
     if (cell == nil){
         [NSException raise:@"headerView == nil.." format:@"No cells with matching CellIdentifier loaded from your storyboard"];
@@ -94,6 +122,8 @@
 
 - (IBAction)onLikeButtonPressed:(UIButton *)sender
 {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:sender.tag];
+    NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
 
     Media *media = self.testArray[sender.tag];
 
@@ -107,8 +137,8 @@
 
         [Activity unlikeMedia:media];
     }
-    NSIndexSet *indexSet = [[NSIndexSet alloc]initWithIndex:sender.tag];
-    [self.newsFeedTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
+
+    [self.newsFeedTableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
 }
 
 -(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -120,15 +150,79 @@
 
     Media *media = self.testArray[section];
 
-    headerView.userNameLabel.text = media.mediaOwner.username;
-    headerView.customImageView.image = [Media getImageFromPFFile:media.mediaOwner.profilePictureMedium];
+    User *user = (User *)[[User query] getObjectWithId:media.mediaOwner.objectId];
+
+
+    headerView.userNameLabel.text = user.username ;
+    headerView.customImageView.image = [Media getImageFromPFFile:user.profilePictureMedium];
+
+    headerView.timeStampLabel.text = [self getDateString:media];
+
     headerView.backgroundColor = [UIColor whiteColor];
     return headerView;
+}
+
+- (NSString *) getDateString:(Media *)media
+{
+    NSTimeInterval secondsBetween = [[NSDate date] timeIntervalSinceDate:media.createdAt];
+
+    if (secondsBetween <60)
+    {
+        return [NSString stringWithFormat:@"%.0fs",secondsBetween];
+    }
+    else if (secondsBetween< 3600)
+    {
+        return [NSString stringWithFormat:@"%.0fm",secondsBetween/60];
+    }
+    else if (secondsBetween<86400)
+    {
+        return [NSString stringWithFormat:@"%.0fh",secondsBetween/3600];
+    }
+    else
+    {
+        return [NSString stringWithFormat:@"%.0fd",secondsBetween/86400];
+    }
+
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 50.0;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"HashTagSegue"])
+    {
+        HashTagViewController *vc = segue.destinationViewController;
+        NSString *string = sender;
+        string = [string stringByReplacingOccurrencesOfString:@"#" withString:@""];
+
+
+        vc.hashTag = [HashTag retrieveHashTagWithName:string];
+    }
+    else if ([segue.identifier isEqualToString:@"ProfileSegue"])
+    {
+        ProfileViewController *vc = segue.destinationViewController;
+        NSString *string = sender;
+        string = [string stringByReplacingOccurrencesOfString:@"@" withString:@""];
+
+        vc.user = [User retrieveUserWithName:string];
+        if ([vc.user isEqual:[User currentUser]])
+        {
+            vc.isNotCurrentUser = false;
+        }
+        else
+        {
+            vc.isNotCurrentUser = true;
+        }
+    }
+    else
+    {
+    UIButton *button = sender;
+    CommentsViewController *vc = segue.destinationViewController;
+    vc.media = self.testArray[button.tag];
+    }
 }
 
     @end

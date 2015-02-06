@@ -36,6 +36,11 @@
     return (User*)[PFUser currentUser];
 }
 
++ (User*) user
+{
+    return (User*)[PFUser user];
+}
+
 
 + (void) retrieveUserWithUserName:(NSString *)text completion:(void (^)(NSArray *array))complete
 {
@@ -53,11 +58,24 @@
     
 }
 
++ (User *) retrieveUserWithName:(NSString *)name
+{
+    PFQuery *query = [User query];
+
+
+    [query whereKey:@"username" containsString:name];
+
+
+    User *user = (User *)[query getFirstObject];
+
+    return user;
+}
+
 + (void) addPictureInUser:(UIImage *)image
 {
     User *user = [self currentUser];
 
-    NSData *imageData = UIImagePNGRepresentation(image);
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.2f);
     PFFile *file = [PFFile fileWithData:imageData];
 
     user.profilePictureMedium = file;
