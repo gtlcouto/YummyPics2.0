@@ -27,7 +27,7 @@
 
 +(void)addMedia:(UIImage *)mediaImage withCaption:(NSString *)caption;
 {
-    NSData *imageData = UIImagePNGRepresentation(mediaImage);
+    NSData *imageData = UIImageJPEGRepresentation(mediaImage, 0.4);
     PFFile *file = [PFFile fileWithData:imageData];
 
     Media *media = [Media object];
@@ -49,7 +49,7 @@
 
     PFQuery *userQuery = [PFQuery queryWithClassName:@"Media"];
     [userQuery whereKey:@"mediaOwner" equalTo:user];
-    [userQuery addAscendingOrder:@"createdAt"];
+    [userQuery addDescendingOrder:@"createdAt"];
 
     [userQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         complete(objects);

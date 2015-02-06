@@ -47,6 +47,15 @@
 
 }
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:true];
+    [Media retrieveFollowedPeopleMedias:^(NSArray *array) {
+        self.testArray = array;
+        [self.newsFeedTableView reloadData];
+    }];
+}
+
 #pragma mark - TableView Delegate Methods
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
