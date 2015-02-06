@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import <Parse/Parse.h>
 #import "User.h"
+#import "Activity.h"
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *userTextField;
@@ -25,6 +26,8 @@
 //UNCOMMENT THS WHEN LOGIN IS DONE
 -(void)viewDidAppear:(BOOL)animated
 {
+    
+
 //    User *currentUser = [User currentUser];
 //    if (currentUser) {
 //        [self performSegueWithIdentifier:@"toTabSegue" sender:nil];

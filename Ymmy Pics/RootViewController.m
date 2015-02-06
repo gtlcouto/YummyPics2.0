@@ -17,6 +17,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import "User.h"
+#import "Media.h"
 #import "DetailTableViewCell.h"
 #import "HeaderTableViewCell.h"
 
@@ -24,6 +25,7 @@
 
 
 @property NSArray *testArray;
+@property (weak, nonatomic) IBOutlet UITableView *newsFeedTableView;
 
 @end
 
@@ -34,7 +36,10 @@
 
     
     // Do any additional setup after loading the view, typically from a nib.
-    self.testArray = [[NSArray alloc] initWithObjects:@"one", @"two", nil];
+    [Media retrieveFollowedPeopleMedias:^(NSArray *array) {
+        self.testArray = array;
+        [self.newsFeedTableView reloadData];
+    }];
 
 
 
@@ -51,7 +56,8 @@
 {
     static NSString *CellIdentifier = @"detailCell";
     DetailTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    cell.customImageView.image = [UIImage imageNamed:@"riodejaneiro"];
+    Media *media = self.testArray[indexPath.section];
+    cell.customImageView.image = [Media getImageFromPFFile:media.mediaFile];
     if (cell == nil){
         [NSException raise:@"headerView == nil.." format:@"No cells with matching CellIdentifier loaded from your storyboard"];
     }
@@ -64,6 +70,24 @@
     return self.testArray.count;
 }
 
+- (void) seaver
+{
+
+    PFQuery *query = [PFQuery queryWithClassName:@"UserNetwork"];
+
+    [query whereKey:@"User" equalTo:[PFUser currentUser]];
+
+    PFObject *userNetwork = [query getFirstObject];
+
+    PFObject *user = userNetwork[@"User"];
+
+
+
+
+}
+- (IBAction)onLikeButtonPressed:(UIButton *)sender {
+}
+
 -(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     static NSString *CellIdentifier = @"headerCell";
     HeaderTableViewCell *headerView = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -71,8 +95,11 @@
         [NSException raise:@"headerView == nil.." format:@"No cells with matching CellIdentifier loaded from your storyboard"];
     }
 
-    headerView.userNameLabel.text = self.testArray[section];
-    headerView.backgroundColor = [UIColor cyanColor];
+    Media *media = self.testArray[section];
+
+    headerView.userNameLabel.text = media.mediaOwner.username;
+    headerView.customImageView.image = [Media getImageFromPFFile:media.mediaOwner.profilePictureMedium];
+    headerView.backgroundColor = [UIColor whiteColor];
     return headerView;
 }
 

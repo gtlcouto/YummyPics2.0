@@ -24,15 +24,37 @@
     return @"Media";
 }
 
-+(void)addMedia:(PFFile *)mediaFile withCaption:(NSString *)caption;
++(void)addMedia:(UIImage *)mediaImage withCaption:(NSString *)caption;
 {
+    NSData *imageData = UIImagePNGRepresentation(mediaImage);
+    PFFile *file = [PFFile fileWithData:imageData];
+
     Media *media = [Media object];
-    media.mediaFile = mediaFile;
+    media.mediaFile = file;
     media.mediaOwner = [User currentUser];
     media.caption = caption;
 
+    [User currentUser].numberOfPosts = [NSNumber numberWithInt:([[User currentUser].numberOfPosts intValue] +1)];
+
+    [[User currentUser] saveInBackground];
+
     [media saveInBackground];
 
+
+}
+
++ (void) retrieveMediasFromUser:(User *)user withCompletion:(void (^)(NSArray *array))complete
+{
+
+    PFQuery *userQuery = [PFQuery queryWithClassName:@"Media"];
+    [userQuery whereKey:@"mediaOwner" equalTo:user];
+    [userQuery addAscendingOrder:@"createdAt"];
+
+    [userQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        complete(objects);
+    }];
+
+    
 
 }
 
@@ -44,13 +66,22 @@
 
     PFQuery *userQuery = [PFQuery queryWithClassName:@"Media"];
     [userQuery whereKey:@"mediaOwner" matchesKey:@"fromUser" inQuery:query];
+    
     [userQuery addAscendingOrder:@"createdAt"];
 
-    NSArray *mediaFromFollowedPeople  = [userQuery findObjects];
+    [userQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        complete(objects);
+    }];
 
-    complete(mediaFromFollowedPeople);
+
     
     
+}
+
++ (UIImage *)getImageFromPFFile:(PFFile *)file
+{
+    NSData *data = [file getData];
+    return [UIImage imageWithData:data];
 }
 
 

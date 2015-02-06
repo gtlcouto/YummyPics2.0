@@ -18,6 +18,11 @@
 @property User *mediaOwner;
 
 
-+(void)addMedia:(PFFile *)mediaFile withCaption:(NSString *)caption;
++ (void) addMedia:(UIImage *)mediaImage withCaption:(NSString *)caption;
++ (void) retrieveFollowedPeopleMedias:(void (^)(NSArray *array))complete;
++ (void) retrieveMediasFromUser:(User*)user withCompletion:(void (^)(NSArray *array))complete;
+
++(UIImage *)getImageFromPFFile:(PFFile *)file;
+
 
 @end

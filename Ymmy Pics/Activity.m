@@ -30,18 +30,59 @@
     return @"Activity";
 }
 
-+ (void)followUser:(User *)toUser
+
++ (BOOL) checkIfUserIsFollowing:(User *)user
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"Activity"];
+
+    [query whereKey:@"toUser" equalTo:user];
+    [query whereKey:@"fromUser" equalTo:[User currentUser]];
+    [query whereKey:@"type" equalTo:@"FOLLOW"];
+
+    if ([query getFirstObject])
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+
+}
+
++ (void)followUser:(User *)toUser withCompletion:(void (^)(BOOL succeeded))complete
 {
     Activity *activity = [Activity object];
     activity.toUser = toUser;
     activity.fromUser = [User currentUser];
     activity.type = @"FOLLOW"; // ActivityTypeFollow
 
-    [activity save];
+
+    int i = [toUser.numberOfFollowers intValue];
+
+
+    toUser.numberOfFollowers = [NSNumber numberWithInt:(i + 1)];
+    [User currentUser].numberOfFollows = [NSNumber numberWithInt:[[User currentUser].numberOfFollows intValue] +1];
+
+
+    [toUser saveInBackground];
+    [[User currentUser] saveInBackground];
+
+
+    [activity saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded)
+        {
+            complete(true);
+        }
+        else
+        {
+            complete(false);
+        }
+    }];
 
 }
 
-+ (void)unfollowUser:(User *)toUser
++ (void)unfollowUser:(User *)toUser withCompletion:(void (^)(BOOL succeeded))complete
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Activity"];
 
@@ -51,7 +92,27 @@
 
     Activity *activity = [query getFirstObject];
 
-    [activity deleteInBackground];
+    int i = [toUser.numberOfFollowers intValue];
+
+
+    toUser.numberOfFollowers = [NSNumber numberWithInt:(i - 1)];
+    [User currentUser].numberOfFollows = [NSNumber numberWithInt:[[User currentUser].numberOfFollows intValue] -1];
+
+
+    [toUser saveInBackground];
+    [[User currentUser] saveInBackground];
+
+    [activity deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+    {
+        if (succeeded)
+        {
+            complete(true);
+        }
+        else
+        {
+            complete(false);
+        }
+    }];
 }
 
 + (void) commentOnMedia:(Media *)media withContent:(NSString *)content

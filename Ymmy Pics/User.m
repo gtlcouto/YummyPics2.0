@@ -18,6 +18,9 @@
 @dynamic username;
 @dynamic password;
 @dynamic facebookId;
+@dynamic numberOfFollowers;
+@dynamic numberOfFollows;
+@dynamic numberOfPosts;
 
 
 
@@ -34,18 +37,33 @@
 }
 
 
-+ (void) retrieveUserWithUserName:(NSString *)text completion:(void (^)(NSArray *))complete
++ (void) retrieveUserWithUserName:(NSString *)text completion:(void (^)(NSArray *array))complete
 {
-    PFQuery *query = [PFQuery queryWithClassName:@"User"];
+    PFQuery *query = [User query];
 
     if (![text isEqualToString:@""])
     {
-        [query whereKey:@"fromUser" containsString:text];
+        [query whereKey:@"username" containsString:text];
     }
 
     NSArray *users = [query findObjects];
 
     complete(users);
+
+    
+}
+
++ (void) addPictureInUser:(UIImage *)image
+{
+    User *user = [self currentUser];
+
+    NSData *imageData = UIImagePNGRepresentation(image);
+    PFFile *file = [PFFile fileWithData:imageData];
+
+    user.profilePictureMedium = file;
+    user.profilePictureSmall = file;
+
+    [user saveInBackground];
 
     
 }

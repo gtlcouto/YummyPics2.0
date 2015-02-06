@@ -9,6 +9,7 @@
 #import "SignUpViewController.h"
 #import <Parse/Parse.h>
 #import "User.h"
+#import "Activity.h"
 
 @interface SignUpViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *userTextField;
@@ -46,6 +47,7 @@
             signUpAlert.title = @"Sucess!";
             signUpAlert.message = @"Your registration was sucessful, an email has been sent to you to confirm your registration. Please validate your email before attempting to log in";
             [signUpAlert show];
+            [Activity followUser:[User currentUser] withCompletion:nil];
             [self dismissViewControllerAnimated:YES completion:nil];
         } else {
             NSString *errorString = [error userInfo][@"error"];

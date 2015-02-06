@@ -16,7 +16,12 @@
 @property (retain) NSString *facebookId;
 @property (retain) PFFile *profilePictureMedium;
 @property (retain) PFFile *profilePictureSmall;
+@property (retain) NSNumber *numberOfPosts;
+@property (retain) NSNumber *numberOfFollows;
+@property (retain) NSNumber *numberOfFollowers;
 
++ (void) retrieveUserWithUserName:(NSString *)text completion:(void (^)(NSArray *array))complete;
++ (void) addPictureInUser:(UIImage *)image;
 
 
 

@@ -7,11 +7,18 @@
 //
 
 #import "SearchViewController.h"
+#import "UserSearchTableViewCell.h"
+#import "ProfileViewController.h"
+#import "User.h"
+#import "Media.h"
+#import "Activity.h"
 
-@interface SearchViewController ()
+@interface SearchViewController () <UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segControl;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+
+@property NSArray *users;
 
 @end
 
@@ -19,7 +26,50 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    [User retrieveUserWithUserName:self.searchBar.text completion:^(NSArray *array) {
+        self.users = array;
+        [self.tableView reloadData];
+    }];
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+     UserSearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"userCell"];
+
+    User *user = [self.users objectAtIndex:indexPath.row];
+
+    cell.usernameLabel.text = user.username;
+    cell.profileImageView.image = [Media getImageFromPFFile:user.profilePictureMedium];
+    cell.profileImageView.layer.cornerRadius = 3.0;
+    cell.profileImageView.clipsToBounds = true;
+
+
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.users.count;
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    [User retrieveUserWithUserName:self.searchBar.text completion:^(NSArray *array) {
+        self.users = array;
+        [self.tableView reloadData];
+    }];
+
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    ProfileViewController *vc = segue.destinationViewController;
+    NSIndexPath *path = self.tableView.indexPathForSelectedRow;
+    vc.user = self.users[path.row];
+    vc.isNotCurrentUser = true;
+
 }
 
 

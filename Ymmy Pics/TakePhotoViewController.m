@@ -52,9 +52,8 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-    NSData *imageData = UIImagePNGRepresentation(chosenImage);
-    PFFile *file = [PFFile fileWithData:imageData];
-    [Media addMedia:file withCaption:@"Nice picture brochacho"];
+
+    [Media addMedia:chosenImage withCaption:@"Nice picture brochacho"];
     [picker dismissViewControllerAnimated:YES completion:NULL];
 
 
