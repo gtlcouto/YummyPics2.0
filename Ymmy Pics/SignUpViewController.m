@@ -33,7 +33,7 @@
 
 
 - (void)signup {
-    User *user = [User currentUser];
+    User *user = [User user];
     user.username = self.userTextField.text;
     user.password = self.passwordTextField.text;
     user.email = self.emailTextField.text;
@@ -47,7 +47,9 @@
             signUpAlert.title = @"Sucess!";
             signUpAlert.message = @"Your registration was sucessful, an email has been sent to you to confirm your registration. Please validate your email before attempting to log in";
             [signUpAlert show];
-            [Activity followUser:[User currentUser] withCompletion:nil];
+            [Activity followUser:[User currentUser] withCompletion:^(BOOL succeeded) {
+
+            }];
             [self dismissViewControllerAnimated:YES completion:nil];
         } else {
             NSString *errorString = [error userInfo][@"error"];

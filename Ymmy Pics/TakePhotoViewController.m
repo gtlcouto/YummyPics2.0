@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 
+@property BOOL isImageAdded;
+
 @end
 
 @implementation TakePhotoViewController
@@ -32,14 +34,19 @@
     self.textView.layer.borderColor = [UIColor grayColor].CGColor;
     self.textView.layer.cornerRadius = 10.0f;
     self.textView.clipsToBounds = YES;
+    self.isImageAdded = true;
 
 
 }
 -(void)viewDidAppear:(BOOL)animated
 {
-    if (!self.imageView.image) {
+    if (self.isImageAdded)
+    {
+        self.isImageAdded = false;
         [self openCamera];
     }
+
+
 
 }
 
@@ -89,6 +96,8 @@
 - (void) dismissCamera:(id)cameraViewController{
     [self dismissViewControllerAnimated:YES completion:nil];
     [cameraViewController restoreFullScreenMode];
+    self.tabBarController.selectedViewController = [self.tabBarController.viewControllers objectAtIndex:0];
+    self.isImageAdded = true;
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
@@ -136,9 +145,11 @@
 
 - (IBAction)onPostButtonPressed:(id)sender
 {
-    [Media addMedia:self.imageView.image withCaption:self.textView.text];
-    [self.textView resignFirstResponder];
-    self.tabBarController.selectedViewController = [self.tabBarController.viewControllers objectAtIndex:0];
+    [Media addMedia:self.imageView.image withCaption:self.textView.text withCompletion:^(BOOL succeeded) {
+        [self.textView resignFirstResponder];
+        self.tabBarController.selectedViewController = [self.tabBarController.viewControllers objectAtIndex:0];
+        self.isImageAdded = true;
+    }];
 
 
 }

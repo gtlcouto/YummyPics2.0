@@ -13,6 +13,7 @@
 #import "User.h"
 #import "Media.h"
 #import "Activity.h"
+#import "HashTag.h"
 
 @interface AppDelegate ()
 
@@ -40,6 +41,7 @@
     [User registerSubclass];
     [Media registerSubclass];
     [Activity registerSubclass];
+    [HashTag registerSubclass];
     return true;
 }
 

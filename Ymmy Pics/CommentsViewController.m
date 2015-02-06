@@ -7,6 +7,8 @@
 //
 
 #import "CommentsViewController.h"
+#import "CommentTableViewCell.h"
+#import "Activity.h"
 
 @interface CommentsViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -14,6 +16,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
+
 @property NSMutableArray *comments;
 
 @end
@@ -30,7 +33,25 @@
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
     self.comments = [NSMutableArray new];
-    self.comments = [NSMutableArray arrayWithObjects:@"1",@"2",@"1",@"2",@"1",@"2",@"1",@"2",@"1",@"2",@"1",@"2",@"1",@"2", nil];
+
+}
+- (IBAction)onSendButtonTapped:(id)sender
+{
+    [Activity commentOnMedia:self.media withContent:self.textField.text withCompletion:^(BOOL succeeded) {
+        [Activity retrieveAllCommentsFromMedia:self.media withCompletion:^(NSArray *array) {
+            self.comments = [array mutableCopy];
+            [self.tableView reloadData];
+        }];
+    }];
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:true];
+    [Activity retrieveAllCommentsFromMedia:self.media withCompletion:^(NSArray *array) {
+        self.comments = [array mutableCopy];
+        [self.tableView reloadData];
+    }];
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -61,11 +82,41 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    CommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
 
-    cell.textLabel.text = self.comments[indexPath.row];
+    Activity *activity = self.comments[indexPath.row];
+
+    User * user = (User *)[[User query] getObjectWithId:activity.fromUser.objectId];
+
+    cell.userNameLabel.text = user.username;
+    cell.commentLabel.text = activity.content;
+    cell.profilePictureImageView.image = [Media getImageFromPFFile:activity.fromUser.profilePictureMedium];
+    cell.timeStamp.text = [self getDateString:activity];
 
     return cell;
+}
+
+- (NSString *) getDateString:(Activity *)activity
+{
+    NSTimeInterval secondsBetween = [[NSDate date] timeIntervalSinceDate:activity.createdAt];
+
+    if (secondsBetween <60)
+    {
+        return [NSString stringWithFormat:@"%.0fs",secondsBetween];
+    }
+    else if (secondsBetween< 3600)
+    {
+        return [NSString stringWithFormat:@"%.0fm",secondsBetween/60];
+    }
+    else if (secondsBetween<86400)
+    {
+        return [NSString stringWithFormat:@"%.0fh",secondsBetween/3600];
+    }
+    else
+    {
+        return [NSString stringWithFormat:@"%.0fd",secondsBetween/86400];
+    }
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

@@ -30,6 +30,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+
+
     self.taskButton.layer.cornerRadius = 10.0f;
     self.taskButton.clipsToBounds = YES;
     self.taskButton.layer.borderWidth= 1.0f;
@@ -69,6 +71,27 @@
         self.images = array;
         [self.profileCollectionView reloadData];
     }];
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:true];
+
+
+    [self reloadLabels];
+
+    
+}
+
+- (void) reloadLabels
+{
+    self.postsLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)[Media getNumberOfPosts:self.user]];
+
+
+    self.followingLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)[Activity getNumberOfFolloweesFromUser:self.user]];
+
+
+    self.followersLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)[Activity getNumberOfFollowersFromUser:self.user]];
 }
 
 - (void) changeButtonToFollow
@@ -130,6 +153,7 @@
 
 
     }
+    [self reloadLabels];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info

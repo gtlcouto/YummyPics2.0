@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Media.h"
+
 
 @interface CommentsViewController : UIViewController
+
+@property Media *media;
 
 @end

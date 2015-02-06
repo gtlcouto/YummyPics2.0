@@ -21,7 +21,10 @@
 @property (retain) NSNumber *numberOfFollowers;
 
 + (void) retrieveUserWithUserName:(NSString *)text completion:(void (^)(NSArray *array))complete;
++ (User *) retrieveUserWithName:(NSString *)name;
 + (void) addPictureInUser:(UIImage *)image;
+
++ (User*) user;
 
 
 

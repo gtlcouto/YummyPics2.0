@@ -33,6 +33,8 @@
 		297261EB1A82F72C0007D1E4 /* DetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 297261EA1A82F72C0007D1E4 /* DetailTableViewCell.m */; };
 		297261EE1A82F7380007D1E4 /* HeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 297261ED1A82F7380007D1E4 /* HeaderTableViewCell.m */; };
 		297261F11A82F7450007D1E4 /* TakePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 297261F01A82F7450007D1E4 /* TakePhotoViewController.m */; };
+		353E7CBE1A850BD00000F268 /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 353E7CBD1A850BD00000F268 /* CommentTableViewCell.m */; };
+		353E7CC11A8511670000F268 /* HashTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 353E7CC01A8511670000F268 /* HashTagViewController.m */; };
 		35463BDA1A803CCE00FE9B1E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 35463BD91A803CCE00FE9B1E /* main.m */; };
 		35463BDD1A803CCE00FE9B1E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 35463BDC1A803CCE00FE9B1E /* AppDelegate.m */; };
 		35463BE01A803CCE00FE9B1E /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35463BDF1A803CCE00FE9B1E /* RootViewController.m */; };
@@ -243,6 +245,9 @@
 		35FEDBBF1A849A930012C0CD /* GPUImagePicture+TextureSubimage.m in Sources */ = {isa = PBXBuildFile; fileRef = 35FEDB071A849A930012C0CD /* GPUImagePicture+TextureSubimage.m */; };
 		35FEDBC01A849A930012C0CD /* GPUImagePicture.m in Sources */ = {isa = PBXBuildFile; fileRef = 35FEDB091A849A930012C0CD /* GPUImagePicture.m */; };
 		35FEDBC11A849A930012C0CD /* GPUImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35FEDB0B1A849A930012C0CD /* GPUImageView.m */; };
+		35FEDBCE1A84A9B80012C0CD /* STTweetLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 35FEDBCB1A84A9B80012C0CD /* STTweetLabel.m */; };
+		35FEDBCF1A84A9B80012C0CD /* STTweetTextStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 35FEDBCD1A84A9B80012C0CD /* STTweetTextStorage.m */; };
+		35FEDBD21A84C8B50012C0CD /* HashTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 35FEDBD11A84C8B50012C0CD /* HashTag.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -287,6 +292,10 @@
 		297261ED1A82F7380007D1E4 /* HeaderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderTableViewCell.m; sourceTree = "<group>"; };
 		297261EF1A82F7450007D1E4 /* TakePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakePhotoViewController.h; sourceTree = "<group>"; };
 		297261F01A82F7450007D1E4 /* TakePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakePhotoViewController.m; sourceTree = "<group>"; };
+		353E7CBC1A850BD00000F268 /* CommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentTableViewCell.h; sourceTree = "<group>"; };
+		353E7CBD1A850BD00000F268 /* CommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentTableViewCell.m; sourceTree = "<group>"; };
+		353E7CBF1A8511670000F268 /* HashTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HashTagViewController.h; sourceTree = "<group>"; };
+		353E7CC01A8511670000F268 /* HashTagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HashTagViewController.m; sourceTree = "<group>"; };
 		35463BD41A803CCE00FE9B1E /* Ymmy Pics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ymmy Pics.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		35463BD81A803CCE00FE9B1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		35463BD91A803CCE00FE9B1E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -707,6 +716,12 @@
 		35FEDB091A849A930012C0CD /* GPUImagePicture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPUImagePicture.m; sourceTree = "<group>"; };
 		35FEDB0A1A849A930012C0CD /* GPUImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPUImageView.h; sourceTree = "<group>"; };
 		35FEDB0B1A849A930012C0CD /* GPUImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPUImageView.m; sourceTree = "<group>"; };
+		35FEDBCA1A84A9B80012C0CD /* STTweetLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTweetLabel.h; sourceTree = "<group>"; };
+		35FEDBCB1A84A9B80012C0CD /* STTweetLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTweetLabel.m; sourceTree = "<group>"; };
+		35FEDBCC1A84A9B80012C0CD /* STTweetTextStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTweetTextStorage.h; sourceTree = "<group>"; };
+		35FEDBCD1A84A9B80012C0CD /* STTweetTextStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTweetTextStorage.m; sourceTree = "<group>"; };
+		35FEDBD01A84C8B50012C0CD /* HashTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HashTag.h; sourceTree = "<group>"; };
+		35FEDBD11A84C8B50012C0CD /* HashTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HashTag.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -774,6 +789,8 @@
 		2933E8B71A8488420079ACB2 /* Comments */ = {
 			isa = PBXGroup;
 			children = (
+				353E7CBC1A850BD00000F268 /* CommentTableViewCell.h */,
+				353E7CBD1A850BD00000F268 /* CommentTableViewCell.m */,
 				294EB25A1A847766002760BF /* CommentsViewController.h */,
 				294EB25B1A847766002760BF /* CommentsViewController.m */,
 			);
@@ -789,8 +806,19 @@
 				296EE34A1A804F3900F5AF94 /* Media.m */,
 				296EE34C1A8051D500F5AF94 /* Activity.h */,
 				296EE34D1A8051D500F5AF94 /* Activity.m */,
+				35FEDBD01A84C8B50012C0CD /* HashTag.h */,
+				35FEDBD11A84C8B50012C0CD /* HashTag.m */,
 			);
 			name = "Data Classes";
+			sourceTree = "<group>";
+		};
+		353E7CC21A85123B0000F268 /* HashTag */ = {
+			isa = PBXGroup;
+			children = (
+				353E7CBF1A8511670000F268 /* HashTagViewController.h */,
+				353E7CC01A8511670000F268 /* HashTagViewController.m */,
+			);
+			name = HashTag;
 			sourceTree = "<group>";
 		};
 		35463BCB1A803CCE00FE9B1E = {
@@ -814,6 +842,7 @@
 		35463BD61A803CCE00FE9B1E /* Ymmy Pics */ = {
 			isa = PBXGroup;
 			children = (
+				35FEDBC91A84A9B80012C0CD /* STTweetLabel */,
 				35FED9BC1A849A930012C0CD /* Source */,
 				35FED9541A849A460012C0CD /* DBCamera */,
 				296EE3451A804A3D00F5AF94 /* Data Classes */,
@@ -857,6 +886,7 @@
 		35463BFD1A803CF800FE9B1E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				353E7CC21A85123B0000F268 /* HashTag */,
 				2933E8B71A8488420079ACB2 /* Comments */,
 				358D63F71A833116004D7EDA /* Camera */,
 				358D63F51A833101004D7EDA /* Feed */,
@@ -1446,6 +1476,17 @@
 			path = Framework;
 			sourceTree = "<group>";
 		};
+		35FEDBC91A84A9B80012C0CD /* STTweetLabel */ = {
+			isa = PBXGroup;
+			children = (
+				35FEDBCA1A84A9B80012C0CD /* STTweetLabel.h */,
+				35FEDBCB1A84A9B80012C0CD /* STTweetLabel.m */,
+				35FEDBCC1A84A9B80012C0CD /* STTweetTextStorage.h */,
+				35FEDBCD1A84A9B80012C0CD /* STTweetTextStorage.m */,
+			);
+			path = STTweetLabel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1576,11 +1617,13 @@
 				35FEDB2A1A849A930012C0CD /* GPUImageCannyEdgeDetectionFilter.m in Sources */,
 				35FEDB241A849A930012C0CD /* GPUImageAverageLuminanceThresholdFilter.m in Sources */,
 				35FED9B91A849A460012C0CD /* DBCameraGridView.m in Sources */,
+				35FEDBD21A84C8B50012C0CD /* HashTag.m in Sources */,
 				35FEDB9E1A849A930012C0CD /* GPUImageSourceOverBlendFilter.m in Sources */,
 				35FEDB9B1A849A930012C0CD /* GPUImageSoftEleganceFilter.m in Sources */,
 				358D63FB1A833354004D7EDA /* ProfileCollectionViewCell.m in Sources */,
 				35FEDBB81A849A930012C0CD /* GPUImageWhiteBalanceFilter.m in Sources */,
 				35FEDBBE1A849A930012C0CD /* GPUImageMovieWriter.m in Sources */,
+				35FEDBCE1A84A9B80012C0CD /* STTweetLabel.m in Sources */,
 				35FEDBA81A849A930012C0CD /* GPUImageThresholdedNonMaximumSuppressionFilter.m in Sources */,
 				35FEDB311A849A930012C0CD /* GPUImageColorDodgeBlendFilter.m in Sources */,
 				35FEDB601A849A930012C0CD /* GPUImageKuwaharaFilter.m in Sources */,
@@ -1648,6 +1691,7 @@
 				35FED99F1A849A460012C0CD /* UIImage+TintColor.m in Sources */,
 				35FEDB751A849A930012C0CD /* GPUImageMotionDetector.m in Sources */,
 				35FEDB361A849A930012C0CD /* GPUImageCropFilter.m in Sources */,
+				353E7CBE1A850BD00000F268 /* CommentTableViewCell.m in Sources */,
 				35FEDBB11A849A930012C0CD /* GPUImageTwoPassTextureSamplingFilter.m in Sources */,
 				35FEDB791A849A930012C0CD /* GPUImageNobleCornerDetectionFilter.m in Sources */,
 				35FEDB2D1A849A930012C0CD /* GPUImageChromaKeyFilter.m in Sources */,
@@ -1678,6 +1722,7 @@
 				35FEDB4F1A849A930012C0CD /* GPUImageGlassSphereFilter.m in Sources */,
 				35FEDB731A849A930012C0CD /* GPUImageMosaicFilter.m in Sources */,
 				35FEDBB41A849A930012C0CD /* GPUImageVideoCamera.m in Sources */,
+				353E7CC11A8511670000F268 /* HashTagViewController.m in Sources */,
 				35FEDB681A849A930012C0CD /* GPUImageLocalBinaryPatternFilter.m in Sources */,
 				35FEDB8E1A849A930012C0CD /* GPUImageRGBErosionFilter.m in Sources */,
 				35FEDB8D1A849A930012C0CD /* GPUImageRGBDilationFilter.m in Sources */,
@@ -1714,6 +1759,7 @@
 				35FEDB9C1A849A930012C0CD /* GPUImageSoftLightBlendFilter.m in Sources */,
 				35FEDBA71A849A930012C0CD /* GPUImageThresholdEdgeDetectionFilter.m in Sources */,
 				35FEDB821A849A930012C0CD /* GPUImagePinchDistortionFilter.m in Sources */,
+				35FEDBCF1A84A9B80012C0CD /* STTweetTextStorage.m in Sources */,
 				35FED9B81A849A460012C0CD /* DBCameraFiltersView.m in Sources */,
 				35FED9B51A849A460012C0CD /* DBMotionManager.m in Sources */,
 				35FEDB691A849A930012C0CD /* GPUImageLookupFilter.m in Sources */,

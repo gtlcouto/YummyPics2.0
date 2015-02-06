@@ -10,6 +10,8 @@
 #import <Parse/Parse.h>
 #import "User.h"
 #import "Activity.h"
+#import "HashTag.h"
+
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *userTextField;
@@ -28,10 +30,10 @@
 {
     
 
-//    User *currentUser = [User currentUser];
-//    if (currentUser) {
-//        [self performSegueWithIdentifier:@"toTabSegue" sender:nil];
-//    }
+    User *currentUser = [User currentUser];
+    if (currentUser) {
+        [self performSegueWithIdentifier:@"toTabSegue" sender:nil];
+    }
 }
 - (IBAction)onForgotPasswordButtonPressed:(id)sender {
 
@@ -71,7 +73,7 @@
     [loginAlert addButtonWithTitle:@"Okay"];
 
 
-    [PFUser logInWithUsernameInBackground:username password:password
+    [User logInWithUsernameInBackground:username password:password
                                     block:^(PFUser *user, NSError *error) {
                                         if (user) {
                                             if (![[user objectForKey:@"emailVerified"] boolValue]) {
