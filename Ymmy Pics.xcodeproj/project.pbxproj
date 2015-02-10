@@ -36,6 +36,7 @@
 		353E7CBE1A850BD00000F268 /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 353E7CBD1A850BD00000F268 /* CommentTableViewCell.m */; };
 		353E7CC11A8511670000F268 /* HashTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 353E7CC01A8511670000F268 /* HashTagViewController.m */; };
 		353E7CC91A854A1C0000F268 /* ActivityFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 353E7CC81A854A1C0000F268 /* ActivityFeed.m */; };
+		353E7CCC1A854EFF0000F268 /* ActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 353E7CCB1A854EFF0000F268 /* ActivityTableViewCell.m */; };
 		35463BDA1A803CCE00FE9B1E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 35463BD91A803CCE00FE9B1E /* main.m */; };
 		35463BDD1A803CCE00FE9B1E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 35463BDC1A803CCE00FE9B1E /* AppDelegate.m */; };
 		35463BE01A803CCE00FE9B1E /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35463BDF1A803CCE00FE9B1E /* RootViewController.m */; };
@@ -299,6 +300,8 @@
 		353E7CC01A8511670000F268 /* HashTagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HashTagViewController.m; sourceTree = "<group>"; };
 		353E7CC71A854A1C0000F268 /* ActivityFeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityFeed.h; sourceTree = "<group>"; };
 		353E7CC81A854A1C0000F268 /* ActivityFeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityFeed.m; sourceTree = "<group>"; };
+		353E7CCA1A854EFF0000F268 /* ActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityTableViewCell.h; sourceTree = "<group>"; };
+		353E7CCB1A854EFF0000F268 /* ActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTableViewCell.m; sourceTree = "<group>"; };
 		35463BD41A803CCE00FE9B1E /* Ymmy Pics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ymmy Pics.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		35463BD81A803CCE00FE9B1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		35463BD91A803CCE00FE9B1E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -949,6 +952,8 @@
 				297261EA1A82F72C0007D1E4 /* DetailTableViewCell.m */,
 				358D64021A8336BD004D7EDA /* UserSearchTableViewCell.h */,
 				358D64031A8336BD004D7EDA /* UserSearchTableViewCell.m */,
+				353E7CCA1A854EFF0000F268 /* ActivityTableViewCell.h */,
+				353E7CCB1A854EFF0000F268 /* ActivityTableViewCell.m */,
 			);
 			name = TableViewCells;
 			sourceTree = "<group>";
@@ -1816,6 +1821,7 @@
 				35463BDA1A803CCE00FE9B1E /* main.m in Sources */,
 				35FEDB911A849A930012C0CD /* GPUImageSaturationBlendFilter.m in Sources */,
 				35FEDBBC1A849A930012C0CD /* module.modulemap in Sources */,
+				353E7CCC1A854EFF0000F268 /* ActivityTableViewCell.m in Sources */,
 				35FEDB211A849A930012C0CD /* GPUImageAlphaBlendFilter.m in Sources */,
 				35FEDB281A849A930012C0CD /* GPUImageBuffer.m in Sources */,
 				35FEDB921A849A930012C0CD /* GPUImageSaturationFilter.m in Sources */,

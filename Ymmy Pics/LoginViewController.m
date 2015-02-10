@@ -13,7 +13,7 @@
 #import "HashTag.h"
 
 
-@interface LoginViewController ()
+@interface LoginViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *userTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 
@@ -30,10 +30,10 @@
 {
     
 
-    User *currentUser = [User currentUser];
-    if (currentUser) {
-        [self performSegueWithIdentifier:@"toTabSegue" sender:nil];
-    }
+//    User *currentUser = [User currentUser];
+//    if (currentUser) {
+//        [self performSegueWithIdentifier:@"toTabSegue" sender:nil];
+//    }
 }
 - (IBAction)onForgotPasswordButtonPressed:(id)sender {
 
@@ -62,6 +62,13 @@
         nil;
     }];
 
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self.userTextField resignFirstResponder];
+    [self.passwordTextField resignFirstResponder];
+    return true;
 }
 
 - (IBAction)onLoginButtonPressed:(id)sender {

@@ -121,6 +121,8 @@
 
     [query whereKey:@"toUser" equalTo:[User currentUser]];
 
+    [query whereKey:@"fromUser" notEqualTo:[User currentUser]];
+
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
 
         complete(objects);
